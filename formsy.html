@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sprawdzanie poprawności</title>
+<meta charset="UTF-8">
+
+<style type="text/css">
+	div
+	{
+	width:420px;
+	background-color:#dfdfdf;
+	padding:10px;
+	}
+	.pole
+	{
+	position:absolute;
+	left:110px;
+	}
+	#ak1
+	{
+	font-size:14px;
+	}
+	</style>
+	
+	<script>
+	function Sprawdz(){
+            var form = document.getElementById('form'),
+            wzory = {
+                'imie' : /^[a-zA-Z]{2,}$/i,
+                'nazw' :/^[a-zA-Z]{2,}$/i,
+                'pesel' : /^[0-9]{11}$/i,
+                'emil' : /^[0-9az-zA-Z_.-]+@[0-9a-zA-Z.-]+\.[a-zA-Z]{2,3}$/i, 
+            }
+            if(document.getElementById('imie').value == '')
+            {
+                alert('Wpisałbyś imie');
+                form.imie.focus();
+                return false;
+            }
+            if(document.getElementById('nazw').value == '')
+            {
+                alert('ale podaj nazwisko');
+                form.nazw.focus();
+                return false;
+            }
+            if(document.getElementById('pesel').value == '')
+            {
+                alert('potrzebujemy twojego pesela');
+                form.pesel.focus();
+                return false;
+            }
+            if(document.getElementById('wiad').value == '')
+            {
+                alert('No nie rozpisałeś się');
+                form.wiad.focus();
+                return false;
+            }
+            if(document.getElementById('emil').value == '')
+            {
+                alert('Jaki masz emil?');
+                form.emil.focus();
+                return false;
+            }       
+            if (document.getElementById('imie').value.length < 3)
+            {
+                alert('Krótkie to imie');
+                form.imie.focus();
+                return false;
+            }
+            if (document.getElementById('nazw').value.length < 3)
+            {
+                alert('Krótkie to nazwisko');
+                form.nazw.focus();
+                return false;
+            }
+            if (document.getElementById('pesel').value.length !== 11)
+            {
+                alert('pesel ma 11 znaków');
+                form.pesel.focus();
+                return false;
+            }
+            if (document.getElementById('wiad').value.length < 10)
+            {
+                alert('No nie rozpisałeś się');
+                form.wiad.focus();
+                return false;
+            }
+            if (document.getElementById('emil').value.length < 8)
+            {
+                alert('Coś krótki ten emil');
+                form.emil.focus();
+                return false;
+            }
+            
+            for(var pole in wzory)
+            {
+                if(form[pole])
+                {
+                    if(!wzory[pole].test(form[pole].value))
+                    {
+                        alert('Pole ' + pole + ' ma nieprawidłową wartość, sory bro');
+                        return false;
+                    }
+                }
+            }
+            alert('Wszystkie dane wypelnione poprawnie')
+            return true;
+        }
+	</script>
+	
+	
+	</head>
+	<body>
+		<div>
+			<form id="form" enctype="text/plain" action="" method="post" onsubmit='return Sprawdz();'>
+			<p id="ak1">Wyślij wiadomość:</p>
+			<b>Imie:</b>
+			<input class="pole" id="imie" name="imie" value="" size="40"><br>
+			<b>Nazwisko:</b>
+			<input class="pole" id="nazw" name="nazw" value="" size="40"><br>
+			<b>Wiadomość:</b>	
+			<input class="pole" id="wiad" name="wiad" value="" size="40"><br>
+			<b>Pesel:</b>	
+			<input class="pole" id="pesel" name="pesel" value="" size="40"><br>
+			<b>Email:</b>	
+			<input class="pole" id="emil" name="emil" value="" size="40"><br>
+			<input type="submit" value="wyslij"></form>
+		</div>
+	
+</html>
+</head>
